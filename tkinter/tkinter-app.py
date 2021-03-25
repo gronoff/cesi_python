@@ -1,4 +1,5 @@
 import tkinter as tk
+from api import api
 
 
 class App(tk.Frame):
@@ -12,7 +13,9 @@ class Home(App):
    def __init__(self, *args, **kwargs):
        App.__init__(self, *args, **kwargs)
        label = tk.Label(self, text="Open Food Fact")
-       label.pack(side="top", fill="both", expand=True)
+       label.pack()
+       label = tk.Label(self, text=api.OpenFoodFactApi.getAll(self))
+       label.pack()
 
 
 class Search(App):
@@ -25,11 +28,14 @@ class Search(App):
         input_texte.pack()
         self.action = tk.Button(self, text="Recherchez", command=self.searchApi)
         self.action.pack()
-        label = tk.Label(self, text="Pas de résultat")
-        label.pack()
+        self.labelResult = tk.Label(self, text="Pas de résultat")
+        self.labelResult.pack()
 
     def searchApi(self):
-        pass
+        res = api.OpenFoodFactApi.getAll(self)
+        for prod in res['products']:
+            if prod['product_name'] and self.var_texte.get() == prod['product_name']:
+                self.labelResult.configure(text=prod)
 
 
 class Top10(App):
