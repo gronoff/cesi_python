@@ -1,58 +1,47 @@
-# class Application(tk.Frame):
-#     def __init__(self, master=None):
-#         super().__init__(master)
-#         self.master = master
-#         self.pack()
-#         self.create_widgets()
-#
-#     def create_widgets(self):
-#         self.search = tk.Button(self, text="Recherche", command=self.truc)
-#         self.search.pack()
-#         self.top = tk.Button(self, text="Top 10", command=self.truc)
-#         self.top.pack()
-#         self.favorite = tk.Button(self, text="Favoris", command=self.truc)
-#         self.favorite.pack()
-#         self.quit = tk.Button(self, text="Quitter", command=self.master.destroy)
-#         self.quit.pack(side="bottom")
-#
-#     def truc(self):
-#         print('truc')
-
-
 import tkinter as tk
 
 
-class Page(tk.Frame):
+class App(tk.Frame):
     def __init__(self, *args, **kwargs):
         tk.Frame.__init__(self, *args, **kwargs)
     def show(self):
         self.lift()
 
 
-class Home(Page):
+class Home(App):
    def __init__(self, *args, **kwargs):
-       Page.__init__(self, *args, **kwargs)
+       App.__init__(self, *args, **kwargs)
        label = tk.Label(self, text="Open Food Fact")
        label.pack(side="top", fill="both", expand=True)
 
 
-class Search(Page):
-   def __init__(self, *args, **kwargs):
-       Page.__init__(self, *args, **kwargs)
-       label = tk.Label(self, text="Recherche d'un aliment")
-       label.pack(side="top", fill="both", expand=True)
+class Search(App):
+    def __init__(self, *args, **kwargs):
+        App.__init__(self, *args, **kwargs)
+        label = tk.Label(self, text="Entrez le nom d'un aliment")
+        label.pack()
+        self.var_texte = tk.StringVar()
+        input_texte = tk.Entry(self, textvariable=self.var_texte, width=30)
+        input_texte.pack()
+        self.action = tk.Button(self, text="Recherchez", command=self.searchApi)
+        self.action.pack()
+        label = tk.Label(self, text="Pas de résultat")
+        label.pack()
+
+    def searchApi(self):
+        pass
 
 
-class Top10(Page):
+class Top10(App):
    def __init__(self, *args, **kwargs):
-       Page.__init__(self, *args, **kwargs)
+       App.__init__(self, *args, **kwargs)
        label = tk.Label(self, text="Affichage des top 10")
        label.pack(side="top", fill="both", expand=True)
 
 
-class Favorite(Page):
+class Favorite(App):
    def __init__(self, *args, **kwargs):
-       Page.__init__(self, *args, **kwargs)
+       App.__init__(self, *args, **kwargs)
        label = tk.Label(self, text="Vos favoris")
        label.pack(side="top", fill="both", expand=True)
 
