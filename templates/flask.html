@@ -51,15 +51,17 @@
         <br />
         <div class="container">
             <div class="row">
+                {% for item in arg %}
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Affichage Aliment</h4>
                         
-                        <p class="card-text">{{arg}}</p>
+                        <p class="card-text">{{item["product_name"]}}</p>
                         <a href="#" class="card-link">Card link</a>
                         <a href="#" class="card-link">Another link</a>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -9,5 +9,5 @@ def our_super_app():
     products=resultat.getAll()
 
     # Flask utilise Jinja2 pour le templating
-    return render_template("/flask.html",arg=products)
+    return render_template("/flask.html",arg=products["products"])
                         
